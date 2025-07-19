@@ -45,7 +45,6 @@ function sendSoapRequest(controlUrl, serviceType, action, bodyXml, callback) {
 function playMediaOnDlna(controlUrl, mediaUrl, callback) {
   const serviceType = 'urn:schemas-upnp-org:service:AVTransport:1';
 
-  // Step 1: Set the media URI
   const setUriBody = `
     <InstanceID>0</InstanceID>
     <CurrentURI>${mediaUrl}</CurrentURI>
@@ -55,7 +54,6 @@ function playMediaOnDlna(controlUrl, mediaUrl, callback) {
   sendSoapRequest(controlUrl, serviceType, 'SetAVTransportURI', setUriBody, (err) => {
     if (err) return callback(err);
 
-    // Step 2: Play the media
     const playBody = `
       <InstanceID>0</InstanceID>
       <Speed>1</Speed>
